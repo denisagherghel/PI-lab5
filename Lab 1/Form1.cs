@@ -34,13 +34,13 @@ namespace Lab_1
             conturP = new List<Color>();
         }
 
-        public void Dilation(Bitmap B, int segnPixelI, int segnPixelJ)
+        public void Dilation(Bitmap ImageToTransform, Bitmap B, int segnPixelI, int segnPixelJ, bool show = true)
         {
-            TransformedImage = new Bitmap(InitialImage);
+            TransformedImage = new Bitmap(ImageToTransform);
             int ns = B.Height;
             int ms = B.Width;
-            int cfor = InitialImage.Width - ms;
-            int c2for = InitialImage.Height - ns;
+            int cfor = ImageToTransform.Width - ms;
+            int c2for = ImageToTransform.Height - ns;
             for(int i = 0; i < cfor; i++)
             {
                 for (int j = 0; j < c2for; j++)
@@ -50,7 +50,7 @@ namespace Lab_1
                     {
                         for (int jj = 0; jj < ns; jj++)
                         {
-                            int c = InitialImage.GetPixel(i + ii, j + jj).R;
+                            int c = ImageToTransform.GetPixel(i + ii, j + jj).R;
                             int r = B.GetPixel(ii, jj).R;
                             if (r == 0 && maxim < c)
                             {
@@ -65,17 +65,20 @@ namespace Lab_1
                 }
             }
 
-            transformedPictureBox.Image = TransformedImage;
-            transformedPictureBox.Refresh();
+            if (show)
+            {
+                transformedPictureBox.Image = TransformedImage;
+                transformedPictureBox.Refresh();
+            }
         }
 
-        public void Erosion(Bitmap B, int segnPixelI, int segnPixelJ)
+        public void Erosion(Bitmap ImageToTransform, Bitmap B, int segnPixelI, int segnPixelJ, bool show = true)
         {
-            TransformedImage = new Bitmap(InitialImage);
+            TransformedImage = new Bitmap(ImageToTransform);
             int ns = B.Height;
             int ms = B.Width;
-            int cfor = InitialImage.Width - ms;
-            int c2for = InitialImage.Height - ns;
+            int cfor = ImageToTransform.Width - ms;
+            int c2for = ImageToTransform.Height - ns;
             for (int i = 0; i < cfor; i++)
             {
                 for (int j = 0; j < c2for; j++)
@@ -85,7 +88,7 @@ namespace Lab_1
                     {
                         for (int jj = 0; jj < ns; jj++)
                         {
-                            int c = InitialImage.GetPixel(i + ii, j + jj).R;
+                            int c = ImageToTransform.GetPixel(i + ii, j + jj).R;
                             int r = B.GetPixel(ii, jj).R;
                             if (r == 0 && minim > c)
                             {
@@ -100,8 +103,11 @@ namespace Lab_1
                 }
             }
 
-            transformedPictureBox.Image = TransformedImage;
-            transformedPictureBox.Refresh();
+            if (show)
+            {
+                transformedPictureBox.Image = TransformedImage;
+                transformedPictureBox.Refresh();
+            }
         }
 
         private void makeInitial()
@@ -121,9 +127,7 @@ namespace Lab_1
             initialPictureBox.Image = InitialImage;
             initialPictureBox.Refresh();
         }
-
         
-
         private void saveImage()
         {
             saveFileDialog.ShowDialog();
@@ -151,7 +155,7 @@ namespace Lab_1
                 }
                 
             }
-            Dilation(B, structureI, structureJ);
+            Dilation(InitialImage, B, structureI, structureJ);
         }
 
         private void buttonDeterminareSchelet_Click(object sender, EventArgs e)
@@ -170,7 +174,7 @@ namespace Lab_1
                 }
 
             }
-            Erosion(B, structureI, structureJ);
+            Erosion(InitialImage, B, structureI, structureJ);
         }
 
         private void buttonSaveImage_Click(object sender, EventArgs e)
@@ -180,7 +184,44 @@ namespace Lab_1
 
         private void buttonSubtiere_Click(object sender, EventArgs e)
         {
-            
+            openFileDialog.ShowDialog();
+            Image loadedB = Image.FromFile(openFileDialog.FileName);
+            Bitmap B = new Bitmap(loadedB);
+
+            Received = -1;
+            using (Form2 form = new Form2(this, B.Width - 1, B.Height - 1))
+            {
+                form.ShowDialog();
+                while (Received == -1)
+                {
+                    int i = 1;
+                }
+
+            }
+            //aplic eroziune, iar pe rezultat aplic dilatare
+            Erosion(InitialImage, B, structureI, structureJ, false);
+            Dilation(TransformedImage, B, structureI, structureJ);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            openFileDialog.ShowDialog();
+            Image loadedB = Image.FromFile(openFileDialog.FileName);
+            Bitmap B = new Bitmap(loadedB);
+
+            Received = -1;
+            using (Form2 form = new Form2(this, B.Width - 1, B.Height - 1))
+            {
+                form.ShowDialog();
+                while (Received == -1)
+                {
+                    int i = 1;
+                }
+
+            }
+            //aplic dilatare, iar pe rezultat aplic eroziune
+            Dilation(InitialImage, B, structureI, structureJ, false);
+            Erosion(TransformedImage, B, structureI, structureJ);
         }
 
         private void buttonMakeInitial_Click(object sender, EventArgs e)

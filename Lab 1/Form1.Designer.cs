@@ -40,6 +40,7 @@
             this.buttonDeterminareContur = new System.Windows.Forms.Button();
             this.buttonDeterminareSchelet = new System.Windows.Forms.Button();
             this.buttonSubtiere = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.initialPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.transformedPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -114,7 +115,7 @@
             // 
             // buttonDeterminareContur
             // 
-            this.buttonDeterminareContur.Location = new System.Drawing.Point(446, 110);
+            this.buttonDeterminareContur.Location = new System.Drawing.Point(446, 66);
             this.buttonDeterminareContur.Name = "buttonDeterminareContur";
             this.buttonDeterminareContur.Size = new System.Drawing.Size(207, 49);
             this.buttonDeterminareContur.TabIndex = 6;
@@ -124,7 +125,7 @@
             // 
             // buttonDeterminareSchelet
             // 
-            this.buttonDeterminareSchelet.Location = new System.Drawing.Point(446, 214);
+            this.buttonDeterminareSchelet.Location = new System.Drawing.Point(446, 121);
             this.buttonDeterminareSchelet.Name = "buttonDeterminareSchelet";
             this.buttonDeterminareSchelet.Size = new System.Drawing.Size(207, 49);
             this.buttonDeterminareSchelet.TabIndex = 9;
@@ -134,19 +135,30 @@
             // 
             // buttonSubtiere
             // 
-            this.buttonSubtiere.Location = new System.Drawing.Point(448, 319);
+            this.buttonSubtiere.Location = new System.Drawing.Point(446, 213);
             this.buttonSubtiere.Name = "buttonSubtiere";
-            this.buttonSubtiere.Size = new System.Drawing.Size(205, 49);
+            this.buttonSubtiere.Size = new System.Drawing.Size(207, 49);
             this.buttonSubtiere.TabIndex = 10;
-            this.buttonSubtiere.Text = "Subtiere";
+            this.buttonSubtiere.Text = "Deschidere";
             this.buttonSubtiere.UseVisualStyleBackColor = true;
             this.buttonSubtiere.Click += new System.EventHandler(this.buttonSubtiere_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(446, 268);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(207, 49);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Inchidere";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1114, 637);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonSubtiere);
             this.Controls.Add(this.buttonDeterminareSchelet);
             this.Controls.Add(this.buttonDeterminareContur);
@@ -180,6 +192,7 @@
         private System.Windows.Forms.Button buttonDeterminareContur;
         private System.Windows.Forms.Button buttonDeterminareSchelet;
         private System.Windows.Forms.Button buttonSubtiere;
+        private System.Windows.Forms.Button button1;
     }
 }
 
